@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FindDoctor</string>
+    <string name="Find">Find</string>
+    <string name="use_my_current_location">Use my current location</string>
+</resources>
