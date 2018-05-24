@@ -27,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.container, MainFragment.newInstance())
                     .commitNow();
         }
-        Disposable docterSearchSubsciption = new DatamanagerImpl().getDoctors(new DoctorSearchQuery.Builder("37.773,-122.413,1")
+        /*Disposable docterSearchSubsciption = new DatamanagerImpl().getDoctors(new DoctorSearchQuery.Builder("37.773,-122.413,1")
                 .Limit(10)
                 .build())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onSuccessDoctorSearch, this::OnFailureDoctorSearch);
+                .subscribe(this::onSuccessDoctorSearch, this::OnFailureDoctorSearch);*/
         //mCompositeDisposable.add(docterSearchSubsciption);
     }
 
