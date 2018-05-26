@@ -15,6 +15,7 @@ public class DatamanagerImpl implements DataManager {
     @Inject
     DoctorsRepository doctorsRepository; //= new DoctorsRepositoryImpl();
 
+    @Inject
     public DatamanagerImpl() {
         DaggerWrapper.getComponent().inject(this);
     }

@@ -1,10 +1,7 @@
 package com.rijogeorge.finddoctor.ui.searchResult;
 
-import android.app.Activity;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.rijogeorge.finddoctor.R;
@@ -19,7 +16,7 @@ public class DoctorSearchListActivity extends AppCompatActivity {
         String location = getIntent().getStringExtra(MainFragment.locationString);
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.doctersListContainer, DoctersListFragment.newInstance())
+                .add(R.id.doctersListContainer, DoctorsListFragment.newInstance())
                 .commit();
     }
 }

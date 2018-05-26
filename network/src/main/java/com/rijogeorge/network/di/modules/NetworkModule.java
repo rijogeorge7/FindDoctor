@@ -20,7 +20,15 @@ public class NetworkModule {
     private static final int CONNECT_TIMEOUT_IN_MS = 200000;
 
     @Provides
+    HttpLoggingInterceptor provideloggingInterceptor(){
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return loggingInterceptor;
+    }
+
+    @Provides
     OkHttpClient provideOkHttpClient(RequestInterceptor requestInterceptor) {
+
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
