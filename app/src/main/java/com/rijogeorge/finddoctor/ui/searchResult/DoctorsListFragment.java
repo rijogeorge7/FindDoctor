@@ -13,6 +13,7 @@ import com.rijogeorge.finddoctor.FindDoctorApplication;
 import com.rijogeorge.finddoctor.R;
 import com.rijogeorge.finddoctor.di.components.DaggerApplicationComponent;
 import com.rijogeorge.network.DataManager;
+import com.rijogeorge.network.model.DoctorSearchQuery;
 
 public class DoctorsListFragment extends Fragment {
 
@@ -28,7 +29,9 @@ public class DoctorsListFragment extends Fragment {
         DataManager dataManager = ((FindDoctorApplication) getActivity().getApplicationContext()).getApplicationComponent().getDataManager();
         DoctorsListViewModelFactory factory = new DoctorsListViewModelFactory(dataManager);
         mViewModel = ViewModelProviders.of(this, factory).get(DoctorsListViewModel.class);
-        mViewModel.loadDoctors();
+        mViewModel.loadDoctors(new DoctorSearchQuery.Builder("37.773,-122.413,1")
+                .Limit(10)
+                .build());
         return inflater.inflate(R.layout.doctors_list_fragment, container, false);
     }
 

@@ -6,10 +6,14 @@ import com.rijogeorge.finddoctor.FindDoctorApplication;
 import com.rijogeorge.finddoctor.di.components.DaggerApplicationComponent;
 import com.rijogeorge.network.DataManager;
 import com.rijogeorge.network.DatamanagerImpl;
+import com.rijogeorge.network.model.Data;
 import com.rijogeorge.network.model.DoctorSearchQuery;
 import com.rijogeorge.network.model.DoctorSearchResponse;
 import com.rijogeorge.network.model.Doctors;
+import com.rijogeorge.network.model.Practices;
+import com.rijogeorge.network.model.Profile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,24 +23,28 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class DoctorsListViewModel extends ViewModel {
-    private DataManager dataManager;;
+    private DataManager dataManager;
+    List<Profile> doctorsList;
     public DoctorsListViewModel(DataManager dataManager) {
         this.dataManager = dataManager;
     }
 
-    public void loadDoctors() {
+    public void loadDoctors(DoctorSearchQuery doctorSearchQuery) {
 
-        Disposable docterSearchSubsciption = dataManager.getDoctors(new DoctorSearchQuery.Builder("37.773,-122.413,1")
-                .Limit(10)
-                .build())
+        Disposable docterSearchSubsciption = dataManager.getDoctors(doctorSearchQuery)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onSuccessDoctorLoading, this::OnFailureDoctorLoading);
     }
 
     private void onSuccessDoctorLoading(DoctorSearchResponse doctorSearchResponse) {
-        int k=0;
+        doctorsList=new ArrayList<>();
+        for(Data data : doctorSearchResponse.getData()){
+            doctorsList.add(data.getProfile());
+        }
     }
+
+
     private void OnFailureDoctorLoading(Throwable e) {
         int i=0;
     }
