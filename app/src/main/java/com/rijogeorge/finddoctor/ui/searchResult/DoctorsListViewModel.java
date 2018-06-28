@@ -19,6 +19,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -31,7 +32,7 @@ public class DoctorsListViewModel extends ViewModel {
 
     public void loadDoctors(DoctorSearchQuery doctorSearchQuery) {
 
-        Disposable docterSearchSubsciption = dataManager.getDoctors(doctorSearchQuery)
+         dataManager.getDoctors(doctorSearchQuery)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onSuccessDoctorLoading, this::OnFailureDoctorLoading);

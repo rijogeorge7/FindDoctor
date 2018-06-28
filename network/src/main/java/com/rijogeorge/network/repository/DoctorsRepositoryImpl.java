@@ -8,6 +8,8 @@ import com.rijogeorge.network.webServices.DoctorSearchService;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.Single;
 
 public class DoctorsRepositoryImpl implements DoctorsRepository {
@@ -21,7 +23,7 @@ public class DoctorsRepositoryImpl implements DoctorsRepository {
     }
 
     @Override
-    public Single<DoctorSearchResponse> getDoctors(DoctorSearchQuery doctorSearchQuery) {
+    public Observable<DoctorSearchResponse> getDoctors(DoctorSearchQuery doctorSearchQuery) {
         return doctorSearchService.getDoctors(doctorSearchQuery.getLocation(),
                 doctorSearchQuery.getLimit(),
                 doctorSearchQuery.getName(),

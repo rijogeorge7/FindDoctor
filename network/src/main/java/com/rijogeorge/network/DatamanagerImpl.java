@@ -8,6 +8,8 @@ import com.rijogeorge.network.repository.DoctorsRepositoryImpl;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.Single;
 
 public class DatamanagerImpl implements DataManager {
@@ -21,7 +23,7 @@ public class DatamanagerImpl implements DataManager {
     }
 
     @Override
-    public Single<DoctorSearchResponse> getDoctors(DoctorSearchQuery doctorSearchQuery) {
+    public Observable<DoctorSearchResponse> getDoctors(DoctorSearchQuery doctorSearchQuery) {
         return doctorsRepository.getDoctors(doctorSearchQuery);
     }
 }
