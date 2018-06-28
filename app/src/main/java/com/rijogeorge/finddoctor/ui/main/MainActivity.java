@@ -1,8 +1,13 @@
-package com.rijogeorge.finddoctor;
+package com.rijogeorge.finddoctor.ui.main;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.rijogeorge.finddoctor.R;
+import com.rijogeorge.finddoctor.ui.base.BaseActivity;
 import com.rijogeorge.finddoctor.ui.main.MainFragment;
 import com.rijogeorge.network.DatamanagerImpl;
 import com.rijogeorge.network.model.DoctorSearchQuery;
@@ -14,7 +19,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     //private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
@@ -43,4 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private void OnFailureDoctorSearch(Throwable e) {
     int i=0;
     }
+
+
 }

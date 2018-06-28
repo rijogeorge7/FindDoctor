@@ -13,12 +13,14 @@ import android.widget.TextView;
 
 import com.rijogeorge.finddoctor.R;
 import com.rijogeorge.finddoctor.ui.searchResult.DoctorSearchListActivity;
+import com.rijogeorge.finddoctor.ui.searchResult.DoctorsListFragment;
 
 public class MainFragment extends Fragment {
 
-    public static final String locationString = "com.rijogeorge.finddoctor.ui.main.locationString";
     private MainViewModel mViewModel;
+    private TextView doctorTypeTextView;
     private TextView locationTextView;
+    private TextView insurenceTextView;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -29,7 +31,9 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
+        doctorTypeTextView = view.findViewById(R.id.doctorTypeText);
         locationTextView = view.findViewById(R.id.locationText);
+        insurenceTextView = view.findViewById(R.id.insurenceText);
         view.findViewById(R.id.findButton).setOnClickListener(this::onClickFindButton);
         return view;
     }
@@ -43,9 +47,18 @@ public class MainFragment extends Fragment {
     }
 
     private void onClickFindButton(View view) {
-        String location = locationTextView.getText().toString();
-        Intent searchDoctorListIntent = new Intent(getActivity(), DoctorSearchListActivity.class);
-        searchDoctorListIntent.putExtra(locationString, location);
-        startActivity(searchDoctorListIntent);
+        if(((MainActivity)getActivity()).isNetworkAvailable()) {
+            String doctorType = doctorTypeTextView.getText().toString();
+            String location = locationTextView.getText().toString();
+            String insurence = insurenceTextView.getText().toString();
+            Intent searchDoctorListIntent = new Intent(getActivity(), DoctorSearchListActivity.class);
+            searchDoctorListIntent.putExtra(DoctorsListFragment.DOCTOR_TYPE, doctorType);
+            searchDoctorListIntent.putExtra(DoctorsListFragment.LOCATION, location);
+            searchDoctorListIntent.putExtra(DoctorsListFragment.INSURENCE, insurence);
+            startActivity(searchDoctorListIntent);
+        }
+        else {
+            ((MainActivity)getActivity()).showDialogMessage("Network issue", "Please check you network connectivity");
+        }
     }
 }

@@ -13,10 +13,12 @@ public class DoctorSearchListActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.doctors_search_list_activity);
-        String location = getIntent().getStringExtra(MainFragment.locationString);
+        String doctorType = getIntent().getStringExtra(DoctorsListFragment.DOCTOR_TYPE);
+        String location = getIntent().getStringExtra(DoctorsListFragment.LOCATION);
+        String insurence = getIntent().getStringExtra(DoctorsListFragment.INSURENCE);
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.doctersListContainer, DoctorsListFragment.newInstance())
+                .add(R.id.doctersListContainer, DoctorsListFragment.newInstance(doctorType, location, insurence))
                 .commit();
     }
 }
